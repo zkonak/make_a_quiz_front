@@ -1,0 +1,15 @@
+.ButtonGroup {
+    display: inline-block;
+    right: 0em;
+    position: fixed;
+    bottom: 0em;
+    background: linear-gradient(to right, #F86624, #662E9B);
+    
+}
+
+.ButtonGroup button {
+    margin-right: 2em;
+    float: right;
+    position: relative;
+    bottom: 1em;
+}
