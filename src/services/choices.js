@@ -7,10 +7,10 @@ const choiceService = {
         return await api.get('/option/question/'+ questionId);
     },
   
-    addChoice: async(questionid,option,correct,score)=> {
-        const choice = {questionid,option,correct,score};
+    addChoice: async(questionId,choice,correct,score)=> {
+        const choiceData = {questionId,choice,correct,score};
        
-        return await api.post('/option',choice);
+        return await api.post('/option',choiceData);
    
     }
 

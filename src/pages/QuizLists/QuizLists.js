@@ -10,7 +10,7 @@ import Select from '../../components/UI/Select/Select';
 import Button from '../../components/UI/Button/Button';
 import Alert from '../../components/UI/Alert/Alert';
 import H2 from '../../components/PageHeading/PageHeading';
-
+import Table from '../../components/Table/Table';
 import {quizService,userService}  from '../../services';
 
 
@@ -40,24 +40,28 @@ class QuizLists extends Component {
         try{
            const response =  await quizService.getAll();
          
-           try{
-               response.data.forEach(async(element) => {
+        //    try{
+        //        response.data.forEach(async(element) => {
                   
-                    const userResponse=await userService.getOne(element.userid);
-                    element.username=userResponse.data.name+' '+userResponse.data.lastname;
+        //             const userResponse=await userService.getOne(element.userId);
+        //             element.username=userResponse.data.name+' '+userResponse.data.lastname;
                   
-               });
+        //        });
 
               
-           }catch(error){
-                console.log(error);
-               this.setState({message: error.response.data.message });
-           }
-        console.log(response)
+        //    }catch(error){
+        //         console.log(error);
+        //        this.setState({message: error.response.data.message });
+        //    }
+       setTimeout(() => {
             this.setState(prevState => ({
                     quizzes: response.data,
                     
                 }));
+       }, 1000);
+           
+
+                console.log(this.state.quizzes)
         } catch(e) {
             console.log(e);
             this.setState({message: e.response.data.message });
@@ -86,6 +90,40 @@ class QuizLists extends Component {
     
 
     render() {
+
+    const     columns = (
+        [
+          {
+        
+            Header: 'Quiz Title',
+            accessor: 'title',
+          },
+           {
+            Header: 'Owner',
+            accessor: 'User.firstname',
+          },
+          {
+            Header: 'Creation Date',
+            accessor: 'createdAt',
+          },
+          {
+            Header: 'Passing Score',
+            accessor: 'scoremin',
+          },
+           {
+             // <img src={NewTabIcon} alt="see Quiz"/>
+            Header: "Take Quiz",
+            Cell: row => (
+                          <Link to={`/quiz/${row.row.original.id}`}><img src={NewTabIcon} alt="see Quiz"/></Link>)
+         }
+           
+
+        ]
+       
+  )
+
+
+
         let sortByOptions = [];
        
 
@@ -120,7 +158,7 @@ class QuizLists extends Component {
                         </div>
                     </div>
                     <div className="TableCont">
-                        <table className="Table">
+                        {/* <table className="Table">
                             <thead>
                                 <tr>
                                     {this.state.tableHeaders.map(head => {
@@ -145,7 +183,7 @@ class QuizLists extends Component {
                                         body = (
                                             <tr key={row['id']}>
                                                 <td>{row['title']}</td>
-                                                <td>{row['username']}</td>
+                                                <td>{row['User.firstname']+' '+row['User.lastname']}</td>
                                                 <td>{row['createdAt']}</td>
                                                 <td>{row['minScore']}</td>
                                                 <td><Link to={`/quiz/${row['id']}`}><img src={NewTabIcon} alt="Take Quiz"/></Link></td>
@@ -155,7 +193,9 @@ class QuizLists extends Component {
                                     return body;
                                 })}
                             </tbody>
-                        </table>
+                        </table> */}
+                          <Table columns={columns} 
+                         data={this.state.quizzes} />
                     </div>
                     </>
              

@@ -6,56 +6,60 @@ import api from '../../services/api';
 
 import Input from '../UI/Input/Input';
 import {choiceService} from  '../../services';
+import Checkbox from 'react-checkbox-component'
 const Choices = (props) => {
    
     let choices = ''
     let checked = props.answer !== 0 ? true : false;
-
+    let answer=React.useState(props.answer);
+    //let selectedAnswer=React.useState(props.selectedAnswer);
   
-   const [array, setArray] = useState([]); 
 
 
-        let arrayChoices=[];
-            let promises=[];
-            useEffect(()=> {     
+        // let arrayChoices=[];
+        //     let promises=[];
+        //     useEffect(()=> {     
             
-            api.get('/option/question/'+ props.choices)
-            .then((res) => {  setArray(res.data); 
-        });
+        //     api.get('/option/question/'+ props.choices)
+        //     .then((res) => {  setArray(res.data); 
+        // });
 
-            }
+        //     }
             
-            ,[]); 
+        //     ,[]); 
 
 
-
-
+console.log(props)
 
     if(!props.viewer) {
       
      
    
-         
+        console.log(props.answer);
         choices = [1, 2, 3, 4].map(i => {
             return (
                 <div key={i}>
                   <p >{i})</p>
+
                     <Input 
                         inputType="text" 
                         changed={(event) => props.changed(event, i)}
                         value={props.value.length >= i ? props.value[i-1] : ""}
                     />
-                    
-                  
-                
-                    {/* <Input inputType="checkbox"
+                {/* <Input inputType="checkbox" key={i} changed={() => props.clicked(i)}  checked={i==props.answer? true : false} value={i}/>
+                     */}
+                    <Checkbox size="small" isChecked={props.value[i-1]==props.answer? true : false} onChange={() => props.clicked(props.value.length >= i ? props.value[i-1] : "")} value={props.value.length >= i ? props.value[i-1] : ""}
+                      color="#fc14bb"/>
+                   
+{/*                 
+                     <Input inputType="checkbox"
                      changed={() => props.clicked(i)}
                      value={i}
                      id={props.answer}
                      name={props.answer}
-                     checked={checked}
+                     checked={i==answer? true : false}
                      
-                   
+                    
                     
                /> */}
                      
@@ -77,15 +81,42 @@ const Choices = (props) => {
         
         let sno = 1;
       
-        choices = array.map(choice => {
+         choices = props.choices.map((choice) => {
             // const classNames = props.selected === choice
             //                     ? [classes.Choice, classes.selected].join(' ')
             //                     : classes.Choice;
+           
+           
+             let isCheck=false;
+             if(choice.id==props.answer){
+                    isCheck=true;
+                }
+               
+             let backgroundcolor="#FFFFFF";
+             if(props.score){
+            
+             if(choice.id==props.correct){
+                 backgroundcolor="#7CFC00";
+             }
+             else if(props.answer!=props.correct && choice.id==props.answer){
+                 backgroundcolor="#FF0000";
+             }
+             else{
+                  backgroundcolor="#FFFFFF";
+             }
+             
+            
+               } 
+                
             return (
                 <div>
-                <Input inputType="checkbox"/>
-                <p key={choice.option} id={choice.option} className="Choices" onClick={() => props.clicked(choice.option)} >{sno++}) <span>{choice.option}</span></p>
-            </div>
+                {/* <Input inputType="checkbox"/> */
+               
+                }
+                <Checkbox size="small" isChecked={isCheck} backgroundColor={backgroundcolor}  color="#fc14bb" onChange={() => props.clicked(choice.id,props.questionIndex)}/>
+                <p  style={{backgroundColor:backgroundcolor}} key={choice.id} className="Choices">{sno++})  <span>{choice.choice}</span></p>
+              
+           </div>
             );
         });
     }
@@ -95,6 +126,7 @@ const Choices = (props) => {
             {choices}
         </div>
     );
+    
 }
 
 export default Choices;

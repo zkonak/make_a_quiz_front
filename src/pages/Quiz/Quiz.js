@@ -16,7 +16,7 @@ import Alert from '../../components/UI/Alert/Alert';
 import Confirm from '../../components/UI/Confirm/Confirm';
 
 
-import {quizService,questionService,choiceService} from  '../../services';
+import {quizService,questionService,choiceService,userQuizService,userResponseService} from  '../../services';
 
 
 
@@ -26,13 +26,7 @@ constructor(props){
     this.state = {
         quizId: '',
         title: '',
-        timer: '',
         questions: [],
-        currentSelectedAnswer: '',
-        currentSelectedQuestionId: '',
-        currentQuestionsNumber:0,
-        preQuizInfo: [
-                ],
         message:''
     }
     }
@@ -45,7 +39,7 @@ constructor(props){
        async componentDidMount(){
           
         const quizId = this.props.match.params.quizId;
-       
+        this.setState(prevState =>({quizId:quizId}));
          await this.fetchData(quizId);
        
      
@@ -59,21 +53,21 @@ constructor(props){
            
            try{
 
-            console.log(quizId);
+            
              const response =await questionService.getQuestions(quizId);
-             response.data.forEach(async (element) => {
-                 const responseChoices =await choiceService.getChoices(element.id);
-                 element.choices=responseChoices.data;
-                 console.log(element)
-             });
+            //  response.data.forEach(async (element) => {
+            //      const responseChoices =await choiceService.getChoices(element.id);
+            //      element.choices=responseChoices.data;
+            //      console.log(element)
+            //  });
              
          
               this.setState(prevState =>({
-                            timer: parseFloat(responseQuiz.data.timelimit),
+                         
                             questions: response.data,
             }));  
 
-            console.log(response);    
+           
         }catch(error){
             console.log(error);
          //  this.setState({message: error.responseChoices.data.message });
@@ -90,17 +84,13 @@ constructor(props){
 
   
 
-     onButtonContinueClickedHandler = () => {
-       
-    }
+    
 
-    onAnswerSelectedHandler = selected => {
+    onAnswerSelectedHandler = (selected,questionIndex)=> {
         let arrayQuestions=this.state.questions;
-        arrayQuestions[this.state.currentQuestionsNumber].selectedAnswer=selected;
+        arrayQuestions[questionIndex].selectedAnswer=selected;
         this.setState(prevState => ({
-            currentSelectedAnswer: selected,
-            currentSelectedQuestionId: prevState.questions[this.state.currentQuestionsNumber].questionId,
-            questions:arrayQuestions
+              questions:arrayQuestions
         }));
 
         
@@ -122,6 +112,62 @@ constructor(props){
         this.props.onCounterComplete();
     }
 
+    onOkButtonClickedHandler=async()=>{
+       const userQuiz={userId:localStorage.getItem("userId"),quizId:this.state.quizId};
+       const userResponse=new Array();
+       let scoreTotal=0;
+        this.state.questions.map((element,i)=>{
+            const foundCorrect = element.Choices.find(correct => correct.correct===1);
+            
+            userResponse.push({questionId:element.id});
+            userResponse[i].choiceId=element.selectedAnswer;
+           
+            if(foundCorrect.id==element.selectedAnswer){
+              
+                scoreTotal=scoreTotal+element.score;
+                element.correct=true;
+                userResponse[i].score=element.score;
+            }
+            else{
+               
+                element.correct=false;
+                userResponse[i].score=0;
+
+            }
+            userQuiz.totalscore=scoreTotal;
+
+            
+           
+          
+            
+        })
+         try{
+                  const responseUserQuiz=await userQuizService.add(userQuiz);
+                  
+                   userResponse.map(async (element)=>{
+                       element.userQuizId=responseUserQuiz.data.id;
+                      
+
+                         const responseUserResponse=await userResponseService.add(element);
+                   });
+
+                    this.props.history.push('/score/'+responseUserQuiz.data.id);
+
+                
+
+
+            }catch(error){
+                console.log(error);
+            }
+
+
+         
+
+    }
+    onCancelButtonClickedHandler=()=>{
+        this.props.history.push('/dashboard');
+    }
+
     render() {
         let body = '';
         let body2='';
@@ -133,9 +179,6 @@ constructor(props){
                 
                     <p className="Language">{this.state.title} Quiz</p>);
                     
-                      
-               
-                    
              
                   { this.state.questions.map((element,i) => {
                             let questionNo=i+1;
@@ -145,12 +188,17 @@ constructor(props){
                                 viewer 
                                 title={element.question} 
                                 questionNo={questionNo}
-                                className="questionViewer" /> 
+                                className="questionViewer"
+                                score={element.score} /> 
 
                               <Choices 
                                 viewer 
-                                choices={element.id} 
-                                className="choicesViewer" />  
+                                choices={element.Choices} 
+                                className="choicesViewer"
+                                questionIndex={i}
+                                clicked={this.onAnswerSelectedHandler}
+                                answer={element.selectedAnswer}
+                                />  
                                
                                 </div>
                        )})
@@ -171,12 +219,7 @@ constructor(props){
                 <div className="Body">
                 {items}
                 </div>
-                 <div className="ButtonGroup">
-                        <Button btnType="nimp" clicked={this.onQuitButtonClickHandler} >Quit</Button>
-                        <Button btnType="cta" clicked={this.onButtonContinueClickedHandler} >Continue</Button>
-                    </div>
-               
-                    <Confirm>{this.props.confirmMsg}</Confirm>
+                <Confirm onOkClicked={this.onOkButtonClickedHandler} onCancelClicked={this.onCancelButtonClickedHandler}>{this.props.confirmMsg}</Confirm>
                   
                 
             </div>

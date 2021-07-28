@@ -7,8 +7,8 @@ const questionService = {
         return await api.get('/question/quiz/'+ quizId);
     },
   
-    addQuestion: async(quizid,type,order,question)=> {
-        const newquestion = {quizid,type,order,question};
+    addQuestion: async(quizId,question,score)=> {
+        const newquestion = {quizId,question,score};
        
         return await api.post('/question',newquestion);
    

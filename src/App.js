@@ -7,6 +7,8 @@ import SignUp from './pages/User/SignUp';
 import Dashboard from './pages/Dashboard/Dashboard'
 import QuizLists from './pages/QuizLists/QuizLists';
 import Quiz from './pages/Quiz/Quiz';
+import Score from './pages/Score/Score';
+import Preview from './pages/Preview/Preview';
 class App extends Component {
 
 
@@ -23,6 +25,8 @@ class App extends Component {
            <Route path="/dashboard" component={Dashboard} />
            <Route path="/available-quizzes" component={QuizLists} />
            <Route path="/quiz/:quizId" component={Quiz} />
+           <Route path="/score/:userQuizId" component={Score} />
+           <Route path="/preview/:quizId" component={Preview} />
            
           </Switch>
            </BrowserRouter>

@@ -22,7 +22,9 @@ const question = (props) => {
         
         )
     } else {
-        body = <p className="questionTitle">{props.questionNo}) {props.title}</p>
+        body =<div> <p className="questionTitle">{props.questionNo}) {props.title}</p>
+               <p>({props.score} point)</p></div>
+        
     }
     return (
         <div className="Question">

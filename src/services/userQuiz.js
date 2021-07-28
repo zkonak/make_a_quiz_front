@@ -1,26 +1,39 @@
 import api from './api';
 
-const quizService = {
-     getAll: async () => {
+const userQuizService = {
+     getOne: async (userQuizId) => {
        
 
-         return await api.get('/quiz/');
+         return await api.get('/userquiz/'+userQuizId);
+     },
+     getAll: async (quizId) => {
+       
+
+         return await api.get('/userquiz/getAll/'+quizId);
      },
     
-    addQuiz: async(title,userid,active,fontcolor,scoremin,timelimit,questions)=> {
-        const quiz = {title,userid,active,fontcolor,scoremin,timelimit};
+    add: async(userQuiz)=> {
        
-        return await api.post('/quiz',quiz);
+       
+        return await api.post('/userquiz',userQuiz);
    
-    }
+    },
+    
+     getByUsername: async (userQuizId) => {
+       
 
-//     updatePlace: async(user_id,city_id,name,description,rooms ,bathrooms,max_guests,price_by_night,available,placeId)=> {
-//         const place = {user_id,placeId,city_id,name,description,rooms ,bathrooms,max_guests,price_by_night,available};
-// console.log(place)
-//         return await api.patch('/places/'+ placeId,place);
-   
-//     }
+         return await api.get('/userquiz/byuser/'+localStorage.getItem("userId"));
+     },
+     getByQuiz: async (quizId) => {
+       
+
+         return await api.get('/userquiz/byquiz/'+quizId);
+     },
+    
+    
+
+
 
 
 };
-export default quizService;
+export default userQuizService;
