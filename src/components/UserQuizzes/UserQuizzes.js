@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import NewTabIcon from '../../assets/open-in-new-tab.png';
 import Alert from '../UI/Alert/Alert';
 
-import './UserQuizzes.css';
+//import './UserQuizzes.css';
 import {quizService,questionService,choiceService,userQuizService,userResponseService} from  '../../services';
 import Table from '../../components/Table/Table';
 import api from '../../services/api';

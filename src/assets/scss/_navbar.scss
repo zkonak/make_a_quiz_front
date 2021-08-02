@@ -1,0 +1,37 @@
+.NavigationItem {
+    list-style: none;
+    display: flex;
+    
+}
+
+
+.logo{
+    
+}
+.NavigationItems {
+
+    list-style: none;
+    display: flex;
+    align-items:right;
+    justify-content:flex-end;
+    
+    
+}
+
+.NavigationItem a {
+  
+    position: relative;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 11px 12px;
+}
+
+
+
+
+
+@media (max-width: 800px) {
+    .NavigationItem.onlyDesktop {
+        display: none;
+    }
+}

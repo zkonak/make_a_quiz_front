@@ -9,6 +9,7 @@ import QuizLists from './pages/QuizLists/QuizLists';
 import Quiz from './pages/Quiz/Quiz';
 import Score from './pages/Score/Score';
 import Preview from './pages/Preview/Preview';
+import CreatePdf from './pages/CreatePdf/CreatePdf';
 class App extends Component {
 
 
@@ -27,6 +28,7 @@ class App extends Component {
            <Route path="/quiz/:quizId" component={Quiz} />
            <Route path="/score/:userQuizId" component={Score} />
            <Route path="/preview/:quizId" component={Preview} />
+           <Route path="/pdf/:quizId" component={CreatePdf} />
            
           </Switch>
            </BrowserRouter>

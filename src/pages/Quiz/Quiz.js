@@ -194,7 +194,7 @@ constructor(props){
                               <Choices 
                                 viewer 
                                 choices={element.Choices} 
-                                className="choicesViewer"
+                                className="form-check"
                                 questionIndex={i}
                                 clicked={this.onAnswerSelectedHandler}
                                 answer={element.selectedAnswer}

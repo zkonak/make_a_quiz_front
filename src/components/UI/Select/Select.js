@@ -1,7 +1,7 @@
 import React from 'react';
 import Select from 'react-select'; //https://github.com/JedWatson/react-select
 
-import './Select.css';
+//import './Select.css';
 
 const select = (props) => {
     const colorStyles = {

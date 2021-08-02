@@ -1,7 +1,7 @@
 import React from 'react';
-
+import logo from "../../../assets/logo2.png";
  
-import  './NavigationItems.css';
+//import  './NavigationItems.css';
 import NavigationItem from './NavigationItem/NavigationItem';
 
 
@@ -10,20 +10,44 @@ const navigationItems = (props) => {
  
             body = (
               
-               <>
+            //    <>
+            //        <img className="logo" src={logo} alt="logo"/>
+            //         <NavigationItem className="onlyDesktop" link="/dashboard">Dashboard</NavigationItem>
+            //         <NavigationItem className="onlyDesktop" link="/create-quiz">Create Quiz</NavigationItem>
+            //         <NavigationItem className="onlyDesktop" link="/available-quizzes">Take Quiz</NavigationItem>
+            //         <NavigationItem className="onlyDesktop" link="/login">Login</NavigationItem>
+            //    </>
+               
+  <div class="wrapper site-header__wrapper">
+    <a href="#" class="brand"> <img className="logo" src={logo} alt="logo"/></a>
+    <nav class="nav">
+      <button class="nav__toggle" aria-expanded="false" type="button">
+        menu
+      </button>
+      <ul class="nav__wrapper">
+                  
                     <NavigationItem className="onlyDesktop" link="/dashboard">Dashboard</NavigationItem>
                     <NavigationItem className="onlyDesktop" link="/create-quiz">Create Quiz</NavigationItem>
                     <NavigationItem className="onlyDesktop" link="/available-quizzes">Take Quiz</NavigationItem>
                     <NavigationItem className="onlyDesktop" link="/login">Login</NavigationItem>
-               </>
+               </ul>
+    </nav>
+  </div>
+
               
             );
+
+
+
+
    
 
     return (
-        <ul className="NavigationItems">
+       // <ul className="NavigationItems">
+        <header class="site-header">
             {body}
-        </ul>
+    </header>
+       // </ul>
     );
 };
     

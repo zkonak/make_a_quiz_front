@@ -48,8 +48,8 @@ console.log(props)
                     />
                 {/* <Input inputType="checkbox" key={i} changed={() => props.clicked(i)}  checked={i==props.answer? true : false} value={i}/>
                      */}
-                    <Checkbox size="small" isChecked={props.value[i-1]==props.answer? true : false} onChange={() => props.clicked(props.value.length >= i ? props.value[i-1] : "")} value={props.value.length >= i ? props.value[i-1] : ""}
-                      color="#fc14bb"/>
+                    <Checkbox size="small" className="form-check" isChecked={props.value[i-1]==props.answer? true : false} onChange={() => props.clicked(props.value.length >= i ? props.value[i-1] : "")} value={props.value.length >= i ? props.value[i-1] : ""}
+                      />
                    
 {/*                 
                      <Input inputType="checkbox"
@@ -113,7 +113,7 @@ console.log(props)
                 {/* <Input inputType="checkbox"/> */
                
                 }
-                <Checkbox size="small" isChecked={isCheck} backgroundColor={backgroundcolor}  color="#fc14bb" onChange={() => props.clicked(choice.id,props.questionIndex)}/>
+                <Checkbox size="small" className="form-check" isChecked={isCheck} backgroundColor={backgroundcolor}   onChange={() => props.clicked(choice.id,props.questionIndex)}/>
                 <p  style={{backgroundColor:backgroundcolor}} key={choice.id} className="Choices">{sno++})  <span>{choice.choice}</span></p>
               
            </div>

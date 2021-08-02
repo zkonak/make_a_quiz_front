@@ -1,0 +1,43 @@
+
+
+@import './variables';
+@import './mixins';
+body{
+    margin:0;
+    width:100%;
+}
+// // Plugins CSS
+// @import "./plugins/plugin-animate-bootstrap-notify";
+// @import "./plugins/plugin-perfect-scrollbar";
+
+// // Core CSS
+ @import "./buttons";
+// @import "./inputs";
+// @import "./typography";
+// @import "./misc";
+// @import "./checkboxes-radio";
+
+// // components
+ //@import "./navbar";
+  @import "./header-16";
+ @import "./home";
+// @import "./dropdown";
+// @import "./alerts";
+// @import "./images";
+// @import "./nucleo-outline";
+// @import "./tables";
+// @import "./sidebar-and-main-panel";
+// @import "./footers";
+// @import "./fixed-plugin";
+
+// // cards
+// @import "./cards";
+// @import "./cards/card-plain";
+// @import "./cards/card-chart";
+// @import "./cards/card-user";
+// @import "./cards/card-map";
+
+// @import "./responsive";
+
+// // react
+// @import "./react/react-differences";
