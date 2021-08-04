@@ -10,6 +10,7 @@ import Quiz from './pages/Quiz/Quiz';
 import Score from './pages/Score/Score';
 import Preview from './pages/Preview/Preview';
 import CreatePdf from './pages/CreatePdf/CreatePdf';
+import PrivateRoute from './PrivateRoute';
 class App extends Component {
 
 
@@ -20,15 +21,15 @@ class App extends Component {
    
         <Switch>
            <Route path="/" exact component={Home} />
-           <Route path="/create-quiz" exact component={CreateQuiz} />
+           <PrivateRoute path="/create-quiz" exact component={CreateQuiz} />
            <Route path="/login" component={Login} />
            <Route path="/signup" component={SignUp} />
-           <Route path="/dashboard" component={Dashboard} />
+           <PrivateRoute path="/dashboard" component={Dashboard} />
            <Route path="/available-quizzes" component={QuizLists} />
-           <Route path="/quiz/:quizId" component={Quiz} />
-           <Route path="/score/:userQuizId" component={Score} />
-           <Route path="/preview/:quizId" component={Preview} />
-           <Route path="/pdf/:quizId" component={CreatePdf} />
+           <PrivateRoute path="/quiz/:quizId" component={Quiz} />
+           <PrivateRoute path="/score/:userQuizId" component={Score} />
+           <PrivateRoute path="/preview/:quizId" component={Preview} />
+           <PrivateRoute path="/pdf/:quizId" component={CreatePdf} />
            
           </Switch>
            </BrowserRouter>

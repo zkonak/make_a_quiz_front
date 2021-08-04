@@ -19,11 +19,9 @@ const navigationItems = (props) => {
             //    </>
                
   <div class="wrapper site-header__wrapper">
-    <a href="#" class="brand"> <img className="logo" src={logo} alt="logo"/></a>
+    <a href="/" class="brand"> <img className="logo" src={logo} alt="logo"/></a>
     <nav class="nav">
-      <button class="nav__toggle" aria-expanded="false" type="button">
-        menu
-      </button>
+      
       <ul class="nav__wrapper">
                   
                     <NavigationItem className="onlyDesktop" link="/dashboard">Dashboard</NavigationItem>

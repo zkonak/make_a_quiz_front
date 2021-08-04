@@ -1,0 +1,48 @@
+.Dashboard{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    .userQuizzes{
+        display:flex;
+        justify-content:space-between;
+        .userQuiz1{
+            border:solid 2px $purple-color;
+            border-radius:30px;
+            box-shadow: 1px 0 10px 15px rgba(0, 0, 0, .3);
+            width:45%;
+            margin-top:1%;
+            .qc{
+                 background-color:$yellow-color;
+                 border-radius:30px;
+                 text-align:center;
+            }
+        }
+        .userQuiz2{
+            border:solid 2px $blue-color;
+            border-radius:30px;
+            box-shadow: 1px 0 10px 15px rgba(0, 0, 0, .3);
+            width:45%;
+            margin-top:1%;
+             .qt{
+                 background-color:$orange-color;
+                 border-radius:30px;
+                 text-align:center;
+            }
+        }
+    }
+            .Players{
+                 border:solid 2px $red-color;
+                border-radius:30px;
+                box-shadow: 1px 0 10px 15px rgba(0, 0, 0, .3);
+                width:45%;
+                margin-top:1%;
+                .pt{
+                 background-color:$red-color;
+                 border-radius:30px;
+                 text-align:center;
+            }
+
+            }
+        
+    
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import  './Question.css';
+//import  './Question.css';
 
 import Input from '../UI/Input/Input';
 
@@ -12,7 +12,7 @@ const question = (props) => {
         body = (
          
           <>
-                <label>Question</label>
+                {/* <label>Question</label> */}
                 <Input 
                     changed={props.changed} 
                     inputType="text"
@@ -22,8 +22,8 @@ const question = (props) => {
         
         )
     } else {
-        body =<div> <p className="questionTitle">{props.questionNo}) {props.title}</p>
-               <p>({props.score} point)</p></div>
+        body =<div> <p className="questionTitle">{props.questionNo}) {props.title}
+               ({props.score} point)</p></div>
         
     }
     return (

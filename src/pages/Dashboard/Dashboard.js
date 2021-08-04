@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import   './Dashboard.css';
+//import   './Dashboard.css';
 import Button from '../../components/UI/Button/Button';
 import UserQuizzes from '../../components/UserQuizzes/UserQuizzes';
 import H2 from '../../components/PageHeading/PageHeading';
 import Players from '../../components/Players/Players';
+import NavigationItems from '../../components/Navigation/NavigationItems/NavigationItems'
 
 
 class Dashboard extends Component {
@@ -21,38 +22,48 @@ class Dashboard extends Component {
         let body = '';
         if(!this.props.newUser) {
             body = (
+                <>
+                <NavigationItems/>
                 <div className="Dashboard">
-                    <H2>Dashboard</H2>
+                    
+                    <div className="userQuizzes">
+                      <div className="userQuiz1">
                     {  <UserQuizzes 
                       
                         
                         quizViewType="created"
-                        className="qc"
-                        titleStyle={{ backgroundColor: '#ffd241' }}
+                        titleStyle="qc"
                         label="Quiz created by You"
                         viewType="created"
                     /> }
+                    </div>
+                     <div className="userQuiz2">
                     { <UserQuizzes 
                       
-                        titleStyle={{ backgroundColor: '#ffd241' }}
+                        titleStyle="qt"
                         quizViewType="took"
-                        className="qt"
-                        label="Quiz took by You"
+                        
+                        label="Quiz taken by You"
                         viewType="took"
                     /> } 
+                     </div>
+                    </div>
+                    <div className="Players">
                     { <Players 
                       
-                        titleStyle={{ backgroundColor: '#ffd241' }}
+                        titleStyle="pt"
                         
-                        className="qt"
+                        
                         label="Players"
                        
-                    /> } 
-                    <div className="ButtonGroup">
+                    /> }
+                    </div> 
+                    {/* <div className="ButtonGroup">
                         <Button clicked={this.onClickTakeQuizHandler} >Take Quiz</Button>
                         <Button clicked={this.onClickCreateQuizHandler} btnType="cta">Create Quiz</Button>
-                    </div>
+                    </div> */}
                 </div>
+                </>
             );
         }
         return body;

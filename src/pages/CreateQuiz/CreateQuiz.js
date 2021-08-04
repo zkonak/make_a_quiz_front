@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import './CreateQuiz.css';
+//import './CreateQuiz.css';
 import CloseIcon from '../../assets/close-icon.png';
+import nextIcon from '../../assets/next.png';
+import prevIcon from '../../assets/Prev.png';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 
@@ -11,6 +13,8 @@ import Confirm from '../../components/UI/Confirm/Confirm';
 import Question from '../../components/Question/Question';
 import Choices from '../../components/Choices/Choices';
 import H2 from '../../components/PageHeading/PageHeading';
+import NavigationItems from '../../components/Navigation/NavigationItems/NavigationItems'
+import Picker from 'vanilla-picker';
 
 import {quizService,questionService,choiceService} from '../../services'
 
@@ -38,14 +42,22 @@ class CreateQuiz extends Component {
        currentScore:0
  
     };
+ 
    // this.onAnswerSelectHandler=this.onAnswerSelectHandler.bind(this);
     this.continueButtonClickHandler=this.continueButtonClickHandler.bind(this);
-   
- }  
+ };
+
    
    
 
+
     componentDidMount() {
+
+//   const parentBasic = document.querySelector('#parent');
+//   const popupBasic = new Picker(parentBasic);
+//   popupBasic.onChange = function(color) {
+//     parentBasic.style.backgroundColor = color.rgbaString;
+//   }
        
         if(localStorage.getItem('questionsData')) {
             const questionsData = JSON.parse(localStorage.getItem('questionsData'));
@@ -323,31 +335,50 @@ class CreateQuiz extends Component {
                 body = (
                   
                   <>
-                        <H2>Create Quiz</H2>
-                        <div className="selectCont">
-                         <p className="errorMessage">{this.state.message}</p>
-                           
+                  
+                       
+                      
 
-                        <label>Title</label>
-                          <Input inputType="text" value={this.state.title}  changed={(e)=>this.setState({ title: e.currentTarget.value })}></Input>
-                       
-                       
-                        <label >Font Color</label>
-                            <Input inputType="text" value={this.state.fontcolor} changed={(e)=>this.setState({ fontcolor: e.currentTarget.value })}></Input>
-                     
-                       
-                            <label htmlFor="">BackGround Color</label>
-                            <Input inputType="text" value={this.state.backgroundcolor} changed={(e)=>this.setState({ backgroundcolor: e.currentTarget.value })}></Input>
+                          <label>Title</label>
+                          <Input inputType="text" className="titleQuiz" value={this.state.title}  changed={(e)=>this.setState({ title: e.currentTarget.value })}></Input>
                         
                        
+                        <div className="inputMain">
+                         <p className="errorMessage">{this.state.message}</p>
+                            <div class="inputs">  
                             <label htmlFor="">Score Minimum</label>
                             <Input inputType="text" value={this.state.scoremin} changed={(e)=>this.setState({ scoremin: e.currentTarget.value })}></Input>
-                            
+                          </div> 
+                         {/* 
+                        <div class="inputs">  
+                        <label >Font Color</label>
+
+                            <Input inputType="text" value={this.state.fontcolor} changed={(e)=>this.setState({ fontcolor: e.currentTarget.value })}></Input>
+                         
+                        
+                        
+       
+      
+                         </div>
+                        <div class="inputs">  
+                       
+                            <label htmlFor="">BackGround Color</label>
+                             <Input inputType="text" value={this.state.backgroundcolor} changed={(e)=>this.setState({ backgroundcolor: e.currentTarget.value })}></Input> 
+
+                          
+       
+     
+                         </div>*/}
+                          
                         </div>
                      
            
-                        {this.state.currentQuestionNo !== 0 ? <p className="questionSNo">Q. <span>{this.state.currentQuestionNo}</span>/<span>{this.state.noOfQuestions}</span></p> : null}
+                      
+                   <div className="questionMain">
                    
+                    <button disabled={this.state.currentQuestionNo > 0 ? false : true} btnType="cta" onClick={this.previousButtonClickHandler} className="prev" ></button>
+                        <div className="question">
+                          {this.state.currentQuestionNo !== 0 ? <p className="questionSNo">Question. <span>{this.state.currentQuestionNo}</span>/<span>{this.state.noOfQuestions}</span></p> : null}
                         <Question
                             changed={this.onQuestionInputChangedHandler} 
                             value={this.state.currentQuestionValue}
@@ -362,8 +393,10 @@ class CreateQuiz extends Component {
                             
                         />
                          <label >Question Score</label>
-                            <Input inputType="text" value={this.state.currentScore} changed={this.onQuestionScoreChangedHandler}></Input>
-                     
+                            <Input inputType="text" className="score" value={this.state.currentScore} changed={this.onQuestionScoreChangedHandler}></Input>
+                     </div>
+                      <button btnType="cta" onClick={this.continueButtonClickHandler} className="next" ></button>
+                     </div>
                         
                      </>
                    
@@ -374,22 +407,23 @@ class CreateQuiz extends Component {
         return (
            
             <>
-               
+               <NavigationItems/>
                 <div className="CreateQuiz">
                     {body}
                     {
                      
-                         <div className="Buttons">
+                    //      <div className="Buttons">
                            
-                            <Button btnType="cta" clicked={this.continueButtonClickHandler} className="quiz-continue-btn" >Continue</Button>
-                            <Button disabled={this.state.currentQuestionNo > 0 ? false : true} btnType="cta" clicked={this.previousButtonClickHandler} className="quiz-prev-btn" >Previous</Button>
-                    </div>
+                    //         <button btnType="cta" onClick={this.continueButtonClickHandler} className="next" ></button>
+                    //         <button disabled={this.state.currentQuestionNo > 0 ? false : true} btnType="cta" onClick={this.previousButtonClickHandler} className="prev" ></button>
+                    // </div>
                   
                     }
+
+                 <Confirm className="confirm" onOkClicked={()=>this.onOkButtonClickedHandler(1)} onCancelClicked={()=>this.onCancelButtonClickedHandler(1)}>{this.props.confirmMsg}</Confirm>
+                
                 </div>
-               
-                 <Confirm onOkClicked={()=>this.onOkButtonClickedHandler(1)} onCancelClicked={()=>this.onCancelButtonClickedHandler(1)}>{this.props.confirmMsg}</Confirm>
-                   
+                  
                 
                 </>
             

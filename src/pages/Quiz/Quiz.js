@@ -2,9 +2,10 @@ import React, { Component,useEffect, useState}  from 'react';
 
 import { Redirect } from 'react-router-dom';
 
+import NavigationItems from '../../components/Navigation/NavigationItems/NavigationItems'
 
 
-import  './Quiz.css';
+//import  './Quiz.css';
 import PreQuizIcon from '../../assets/pre-quiz-header-icon.png';
 import CounterCompleteIcon from '../../assets/times-up-icon.png';
 
@@ -63,7 +64,7 @@ constructor(props){
              
          
               this.setState(prevState =>({
-                         
+                           title:responseQuiz.data.title,
                             questions: response.data,
             }));  
 
@@ -177,13 +178,14 @@ constructor(props){
         
             body = (
                 
-                    <p className="Language">{this.state.title} Quiz</p>);
+                    <h2>{this.state.title} Quiz</h2>);
                     
              
-                  { this.state.questions.map((element,i) => {
+                  { 
+                       this.state.questions.map((element,i) => {
                             let questionNo=i+1;
                     items.push(      
-                            <div key={i}>
+                            <div key={i} className="question">
                             <Question 
                                 viewer 
                                 title={element.question} 
@@ -194,7 +196,7 @@ constructor(props){
                               <Choices 
                                 viewer 
                                 choices={element.Choices} 
-                                className="form-check"
+                                
                                 questionIndex={i}
                                 clicked={this.onAnswerSelectedHandler}
                                 answer={element.selectedAnswer}
@@ -214,15 +216,18 @@ constructor(props){
 
     
         return (
+            <>
+            <NavigationItems/>
             <div className="Quiz">
                 {body}
                 <div className="Body">
                 {items}
                 </div>
-                <Confirm onOkClicked={this.onOkButtonClickedHandler} onCancelClicked={this.onCancelButtonClickedHandler}>{this.props.confirmMsg}</Confirm>
+                <Confirm className="confirm" onOkClicked={this.onOkButtonClickedHandler} onCancelClicked={this.onCancelButtonClickedHandler}>{this.props.confirmMsg}</Confirm>
                   
                 
             </div>
+            </>
         );
     }
 }

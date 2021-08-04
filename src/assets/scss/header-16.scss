@@ -1,65 +1,62 @@
 
+$small:900px;
 
-$small: 600px;
 
 .logo {
   width:40%;
-  margin:6%;
+  margin-left:2%;
 }
 
 .site-header {
   position: relative;
+  
  
 }
 
 .site-header__wrapper {
-  //padding-top: 1rem;
-  //padding-bottom: 1rem;
-  margin:2%;
+  
 
-  @media (min-width: $small) {
+
+  background-color:#C5f4E0;
+   
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    //align-items: center;
     padding-top: 0;
     padding-bottom: 0;
-  }
+    background-color:"#C5f4E0";
+    @include mobile{
+      flex-direction:column;
+      align-items: inherit;
+      text-align: center;
+
+
+    }
+  
 }
 
 
 .nav__wrapper {
+  
   list-style-type: none;
-  @media (min-width: $small) {
-    display: flex;
-  }
+  display: flex;
+   @include mobile{
+     flex-direction:column;
+     padding-inline-start: 0;
+     
+   }
 
-  @media (max-width: $small - 1) {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    left: 0;
-    z-index: -1;
-    background-color: #d9f0f7;
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(-100%);
-    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-
-    &.active {
-      visibility: visible;
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+  
 }
 
 .nav__item {
  
   &:first-child {
     background:$orange-color;
+    border-radius:30px 0px 0px 30px;
     @media (min-width: $small) {
       a {
-       // border-left: 1px solid #b5b5b5;
+       
       }
     }
   }
@@ -72,28 +69,21 @@ $small: 600px;
    }
      &:nth-child(4) {
      background:$blue-color;
+     border-radius:0px 30px 30px 0px;
    }
 
   .NavLink {
     display: block;
-    padding: 1.5rem 1rem;
+    padding: 1rem 1rem;
     text-decoration:none;
     color: $white-color;
     font-family:$sans-serif-family;
-
-    @media (min-width: $small) {
-     // border-right: 1px solid #b5b5b5;
+    @include mobile{
+       padding: 0.75rem 1rem;
     }
+
+   
   }
 }
 
-.nav__toggle {
-  display: none;
 
-  @media (max-width: $small - 1) {
-    display: block;
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
-  }
-}

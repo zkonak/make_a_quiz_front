@@ -7,7 +7,7 @@ const button = (props) => {
     return (
         <button 
             style={props.style} 
-            className="Button" 
+            className={props.className !== undefined ? "Button" : props.className} 
             onClick={props.clicked !== undefined ? props.clicked : null}
             disabled={disabled}
         >{props.children}</button>

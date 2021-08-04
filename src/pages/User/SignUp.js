@@ -5,9 +5,10 @@ import Button from '../../components/UI/Button/Button';
 import Alert from '../../components/UI/Alert/Alert';
 
 import FormField from '../../components/FormField/FormField';
+import Input from '../../components/UI/Input/Input';
 import {userService} from '../../services';
-
-
+import logo from "../../assets/logo2.png";
+import NavigationItems from '../../components/Navigation/NavigationItems/NavigationItems'
 
 class SignUp extends Component {
     state = {
@@ -117,39 +118,39 @@ class SignUp extends Component {
              //   <Aux>
              <>
                    
-                    <p className="title">Sign Up</p>
-                    <div className="Auth">
+                  <NavigationItems/>
+                    <div className="center-item">
                         <form onSubmit={this.onFormSubmitHandler} >
+                        <h3>SIGN UP</h3>
                             <p className="errorMessage">{this.state.message}</p>
-                            <FormField 
-                                formFieldType="text" 
-                                changed={(event) => this.onInputChangedHandler(event, "username")} 
-                                label="Username"  
-                            />
-                           
-                            <FormField 
-                                formFieldType="email" 
+                            
+                            <Input className="input"
+                                inputType="email" 
                                 changed={(event) => this.onInputChangedHandler(event, "email")} 
                                 label="Email"  
+                                placeHolder="Enter Email"
                             />
-                            <FormField 
-                                formFieldType="password" 
+                            <Input className="input"
+                                inputType="password" 
                                 changed={(event) => this.onInputChangedHandler(event, "password")} 
                                 label="Password" 
+                                placeHolder="Enter Password"
                             />
 
-                             <FormField 
-                                formFieldType="text" 
+                             <Input className="input"
+                                inputType="text" 
                                 changed={(event) => this.onInputChangedHandler(event, "firstname")} 
                                 label="Firstname" 
+                                placeHolder="Enter Firstname"
                             />
-                              <FormField 
-                                formFieldType="text" 
+                              <Input className="input"
+                                inputType="text" 
                                 changed={(event) => this.onInputChangedHandler(event, "lastname")} 
-                                label="Lastname" 
+                                label="Lastname"
+                                placeHolder="Enter Lastname" 
                             />
 
-                            <Button btnType="cta">Sign Up</Button>
+                            <button  className="button" btnType="cta">Sign Up</button>
                         </form>
                         <p className="OR">OR</p>
                        

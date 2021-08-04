@@ -7,8 +7,9 @@ const input = props => {
         <input 
             onChange={props.changed} 
             type={props.inputType} 
-            className="Input" 
+            className={props.className} 
             value={props.value}
+            placeHolder={props.placeHolder}
         />
     );
 }

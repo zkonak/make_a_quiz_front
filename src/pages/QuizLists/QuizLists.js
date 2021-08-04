@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
-import './QuizLists.css';
+//import './QuizLists.css';
 import NewTabIcon from '../../assets/open-in-new-tab.png';
 
 import Select from '../../components/UI/Select/Select';
@@ -12,7 +12,7 @@ import Alert from '../../components/UI/Alert/Alert';
 import H2 from '../../components/PageHeading/PageHeading';
 import Table from '../../components/Table/Table';
 import {quizService,userService}  from '../../services';
-
+import NavigationItems from '../../components/Navigation/NavigationItems/NavigationItems'
 
 class QuizLists extends Component {
     state = {
@@ -39,6 +39,9 @@ class QuizLists extends Component {
       
         try{
            const response =  await quizService.getAll();
+            response.data.map((e)=>{
+              e.createdAt=e.createdAt.split('T')[0];
+            })
          
         //    try{
         //        response.data.forEach(async(element) => {
@@ -132,7 +135,9 @@ class QuizLists extends Component {
             body = (
                 
                 <>
-                    <H2>Available Quizzes</H2>
+                <NavigationItems/>
+                <div class="QuizLists">
+                    <h2>Available Quizzes</h2>
                     <div className="selectCont">
                         <div>
                             <label>Filter By</label>
@@ -158,51 +163,17 @@ class QuizLists extends Component {
                         </div>
                     </div>
                     <div className="TableCont">
-                        {/* <table className="Table">
-                            <thead>
-                                <tr>
-                                    {this.state.tableHeaders.map(head => {
-                                        
-                                        return <th 
-                                                onClick={head !== 'Take Quiz' ? () => this.onTableHeaderClickHandler(head) : null}
-                                                className='Take Quiz'
-                                                key={head}
-                                               
-                                                >
-                                                    {head.replace(/_/g, ' ')}
-                                                </th>
-                                    })}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {this.state.quizzes.map(row => {
-                                   
-                                    let body = null;
-                                   
-                                    if(row['title'] === this.state.filterBy || this.state.filterBy === 'select' || this.state.filterBy === 'All') {
-                                        body = (
-                                            <tr key={row['id']}>
-                                                <td>{row['title']}</td>
-                                                <td>{row['User.firstname']+' '+row['User.lastname']}</td>
-                                                <td>{row['createdAt']}</td>
-                                                <td>{row['minScore']}</td>
-                                                <td><Link to={`/quiz/${row['id']}`}><img src={NewTabIcon} alt="Take Quiz"/></Link></td>
-                                            </tr>
-                                        );
-                                    }
-                                    return body;
-                                })}
-                            </tbody>
-                        </table> */}
+                      
                           <Table columns={columns} 
                          data={this.state.quizzes} />
+                    </div>
                     </div>
                     </>
              
             );
        
         return (
-            <div className="QuizLists">
+            <div>
             
                 {body}
             </div>

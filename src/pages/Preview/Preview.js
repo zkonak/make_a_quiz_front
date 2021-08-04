@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 
 
-import  './Preview.css';
+//import  './Preview.css';
 
 import Question from '../../components/Question/Question';
 import Choices from '../../components/Choices/Choices';
@@ -12,6 +12,7 @@ import Button from '../../components/UI/Button/Button';
 import Alert from '../../components/UI/Alert/Alert';
 import Confirm from '../../components/UI/Confirm/Confirm';
 
+import NavigationItems from '../../components/Navigation/NavigationItems/NavigationItems'
 
 import {quizService,questionService,choiceService,userQuizService,userResponseService} from  '../../services';
 
@@ -72,7 +73,7 @@ constructor(props){
              this.setState(prevState =>({
                            // userQuiz:responseUserQuiz.data,
                             questions: response.data,
-                            quiz:responseQuiz
+                            quiz:responseQuiz.data
                           
             })) 
             this.getCorrectChoiceId()
@@ -121,7 +122,7 @@ constructor(props){
           console.log(this.state.quiz);
             body = (
                 
-                   <div> <p className="Language">{this.state.quiz.title} Quiz</p>
+                   <div> <h2>{this.state.quiz.title} Quiz</h2>
                     </div>
                     
                     
@@ -131,7 +132,7 @@ constructor(props){
                   { this.state.questions.map((element,i) => {
                             let questionNo=i+1;
                     items.push(      
-                            <div key={i}>
+                            <div key={i} className="question">
                             <Question 
                                 viewer 
                                 title={element.question} 
@@ -164,15 +165,19 @@ constructor(props){
 
     
         return (
+          <>
+          <NavigationItems/>
             <div className="Quiz">
                 {body}
                 <div className="Body">
                 {items}
                 </div>
-                <Confirm onOkClicked={this.onOkButtonClickedHandler}>{this.props.confirmMsg}</Confirm>
-                  
+                {/* <Confirm onOkClicked={this.onOkButtonClickedHandler}>{this.props.confirmMsg}</Confirm>
+                   */}
+                    <button className="button primary save confirm" onClick={this.onOkButtonClickedHandler} >Go To Dashboard</button> 
                 
             </div>
+            </>
         );
     }
 }

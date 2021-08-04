@@ -1,6 +1,7 @@
 
 
 @import './variables';
+@import "./typography";
 @import './mixins';
 body{
     margin:0;
@@ -12,24 +13,25 @@ body{
 
 // // Core CSS
  @import "./buttons";
-// @import "./inputs";
-// @import "./typography";
+ @import "./inputs";
+
 // @import "./misc";
 // @import "./checkboxes-radio";
 
 // // components
- //@import "./navbar";
+  //@import "./navbar";
   @import "./header-16";
- @import "./home";
-// @import "./dropdown";
-// @import "./alerts";
-// @import "./images";
-// @import "./nucleo-outline";
-// @import "./tables";
-// @import "./sidebar-and-main-panel";
-// @import "./footers";
-// @import "./fixed-plugin";
-
+  @import "./home";
+  @import "./newquiz";
+  @import "./login";
+  @import "./quizList";
+  @import "./createQuiz";
+  @import "./question";
+  @import "./choices";
+  @import "./confirm";
+  @import "./quiz";
+  @import "./dashboard";
+  @import "./table";
 // // cards
 // @import "./cards";
 // @import "./cards/card-plain";

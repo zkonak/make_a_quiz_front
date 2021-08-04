@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import  './Auth.css';
+//import  './Auth.css';
 import Button from '../../components/UI/Button/Button';
 import Alert from '../../components/UI/Alert/Alert';
 
 import FormField from '../../components/FormField/FormField';
+import Input from '../../components/UI/Input/Input';
 import {userService} from '../../services'
 import Cookies from 'universal-cookie';
+import logo from "../../assets/logo2.png";
 const cookies = new Cookies();
 
 
@@ -95,10 +97,13 @@ class Login extends Component {
             body = (
              //   <Aux>
              <>
+             <a href="/" class="brand"> <img className="logo" src={logo} alt="logo"/></a>
                     {authRedirect} 
-                    <p className="title">Login</p>
-                    <div className="Auth">
+                  
+                    <div className="center-item">
+                    
                         <form onSubmit={this.onFormSubmitHandler} >
+                        <h3>LOGIN</h3>
                             <p className="errorMessage">{this.state.message}</p>
                             {
                                 this.props.linkSent === 1
@@ -109,17 +114,19 @@ class Login extends Component {
                                 )
                                 : null
                             }
-                            <FormField 
-                                formFieldType="email" 
+                            <Input  className="input"
+                                inputType="email" 
                                 changed={(event) => this.onInputChangedHandler(event, "email")} 
                                 label="Email" 
+                                placeHolder="Enter Mail"
                             />
-                            <FormField 
-                                formFieldType="password" 
+                            <Input className="input"
+                                inputType="password" 
                                 changed={(event) => this.onInputChangedHandler(event, "password")} 
                                 label="Password" 
+                                placeHolder="Enter Password"
                             />
-                            <Button btnType="cta">{'Login'}</Button>
+                            <button className="button" btnType="cta">{'Login'}</button>
                         </form>
                         <p className="OR">OR</p>
                        

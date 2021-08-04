@@ -1,19 +1,66 @@
-.Home img{
+.Home .img{
     width: 100%;
     height: 160px;
     position : relative;
 }
+.Home .container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+.txt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+ .Home .icons{
+     display:flex;
+    justify-content: space-around;
+     @include mobile {
+        flex-direction:column;
+        align-items:center;
+    }
+ }
 
-.image{
-    position: relative;
-    background: url("../jason-leung-D4YrzSwyIEc-unsplash.jpg") no-repeat;
-    width: 100%;
-    height: 160px;
-}
-.txt{
-    position: relative;
-left: 30px;
-top: 30px;
-}
+ .Home .article{
+     width:30%;
+     margin:5%;
+     display: flex;
+    flex-direction: column;
+    align-items: center;
+ }
+
+ .Home .article img{
+     height:160px;
+     width: 40%;
+     @include tablet {
+         width: 60%;
+    }
+     @include mobile {
+         width: 100%;
+    }
+
+     
+ }
+
+
+ .Home .article p{
+     font-size:1rem;
+     margin-left:5%;
+     
+ }
+
+ .tableContainer{
+     width:100%;
+     display:flex;
+     justify-content:center;
+     background-color:$blue-color;
+     
+ }
+
+
+
+
 
    

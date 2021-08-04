@@ -29,6 +29,9 @@ class QuizCreateView extends Component {
               .then( response=>{
 
                 response.data.forEach((element) => {
+                   
+                 element.createdAt=element.createdAt.split('T')[0];
+           
                 userQuizService.getAll(element.id).then(userQuizResponse=>{
                 
                 if(userQuizResponse.data){
@@ -56,8 +59,17 @@ class QuizCreateView extends Component {
            
             
              }else{
-               let  response=await userQuizService.getByUsername();
-                this.setState(prevState =>({quizzes:response.data}));  
+               userQuizService.getByUsername()
+               .then( response=>{
+                 response.data.map((e)=>{
+                  e.createdAt=e.createdAt.split('T')[0];
+                });
+                 this.setState(prevState =>({quizzes:response.data})); 
+               })
+                
+                // setTimeout(() => {
+               
+                //  },1000); 
              }
            
         }catch(error){
@@ -72,7 +84,7 @@ class QuizCreateView extends Component {
         average = average+data[index].totalscore;
         
       }
-      return (average/data.length).toString();
+      return parseFloat(average/data.length).toFixed(2).toString();
     }
 
    render() {
@@ -134,19 +146,17 @@ class QuizCreateView extends Component {
       
         
         let body = '';
-         console.log( this.state.quizzes)
+         
             body = (
-                <div className="UserQuizzes">
-                    <p className="Title" style={this.props.titleStyle}>{this.props.label}</p>
+                <div >
+                    <p className={this.props.titleStyle}>{this.props.label}</p>
                     <div className="TableCont">
                         <Table columns={columns} 
-                         data={this.state.quizzes} />
-                        {/* <Table> 
-                            content={this.state.quizzes}
-                            viewType={this.props.viewType}
-                        </Table> */
+                         data={this.state.quizzes}
+                         value="5" />
+                       
                         
-                        }
+                     
                     </div>
                     
                 </div>

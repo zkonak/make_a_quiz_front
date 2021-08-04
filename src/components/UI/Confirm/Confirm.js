@@ -27,11 +27,11 @@ class Confirm extends Component {
     render() {
         return this.props.confirmMsg !== ''
             ? (
-                    <div className="" >
+                    <div className={this.props.className} >
                     
-                        <div className="ButtonGroup">
-                            <Button style={{ backgroundColor: '#ffffff', color: '#000'}} clicked={this.onOkButtonClickedHandler} >OK</Button>
-                            <Button style={{ backgroundColor: '#d32f2f', color: '#fff'}} clicked={this.onCancelButtonClickedHandler} >Cancel</Button>
+                        <div>
+                            <button className="button primary save" onClick={this.onOkButtonClickedHandler} >Save</button>
+                            <button className="button primary cancel" onClick={this.onCancelButtonClickedHandler} >Cancel</button>
                         </div>
                     </div>
                 )

@@ -1,0 +1,185 @@
+.CreateQuiz {
+   
+    //width: 90%;
+    display:flex;
+    flex-direction:column;
+    
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top:1%;
+    
+    .inputMain{
+         display:flex;
+         justify-content: space-between;
+         margin-bottom: 1%;
+        .inputs{
+            display:flex;
+            flex-direction:column;
+            margin-right: 5%;
+
+         }
+         .titleQuiz{
+             width:100%;
+             
+             margin-bottom: 1%;
+         }
+         label{
+              margin-top: 10%;
+              margin-bottom: 1%;
+         }
+    }
+    .questionMain{
+         display:flex;
+         justify-content:space-between;
+         border:solid 2px $purple-color;
+         box-shadow: 1px 0 10px 15px rgba(0, 0, 0, .3);
+         border-radius:30px;
+         margin-top:1%;
+         
+   
+     label{
+              margin-top: 3%;
+              margin-bottom: 1%;
+         }
+
+   
+         
+             .next{
+                   border: none;
+                   width:90px;
+                   height:90px;
+                   padding: 1em 3em;
+                   //font-size: 1.2rem;
+                   background-color:$white-color;
+                   //cursor: pointer;
+                   //outline: none;
+                   border-radius: 3px;
+                   color:$orange-color;
+                   background-image:url("../next.png");
+                   background-size:     cover; 
+                   background-repeat:   no-repeat;
+                   margin-top:20%; 
+                
+             }
+              .prev{
+                   border: none;
+                   width:90px;
+                   height:90px;
+                   padding: 1em 3em;
+                   //font-size: 1.2rem;
+                   background-color:$white-color;
+                   //cursor: pointer;
+                   //outline: none;
+                   border-radius: 3px;
+                   color:$orange-color;
+                   background-image:url("../Prev.png");
+                   background-size:     cover; 
+                   background-repeat:   no-repeat;
+                   margin-top:20%; 
+                
+             }
+             .question{
+                 width:80%;
+                 display:flex;
+                 flex-direction:column;
+                 margin-left: 5%;
+                
+                .score{
+                    width:20%;
+                    margin-bottom:1%;
+                    
+
+                }
+             }
+              
+         
+    }
+    .confirm{
+        margin-top:1%;
+        margin-left:40%;
+    }
+   
+
+}
+
+// .CreateQuiz > div {
+//     display: block;
+//     position: relative;
+//     text-align: left;
+//     margin-bottom: 4em;
+//     margin-top: 4em;
+// }
+
+// .CreateQuiz > div > .LanguageSelectGroup {
+//     display: flex;
+// }
+
+// .selectCont input {
+//     font-size: 1rem;
+//     padding: 0px 10px;
+//     font-family: 'Righteous', sans-serif;
+// }
+
+// .CreateQuiz > div label {
+//     display: block;
+//     margin-bottom: 10px;
+// }
+
+// .CreateQuiz .questionSNo {
+  
+// }
+
+// .CreateQuiz > div.Buttons {
+//     position: fixed;
+//     bottom: 4em;
+//     right: 4em;
+    
+// }
+
+// .CreateQuiz > div.Buttons > button {
+//     margin-right: 1em;
+// }
+
+// .Close {
+//     float: right;
+//     width: 45px;
+//     cursor: pointer;
+//     margin-right: 1em;
+//     margin-top: 1em;
+// }
+
+// .Difficulty select {
+//     height: 2.3em;
+//     font-size: 1.4rem;
+//     width: 34%;
+//     outline: none;
+//     font-family: 'Righteous', cursive;
+//     padding: 0px 10px;
+// }
+
+// @media (max-width: 900px) {
+//     .LanguageSelectGroup > div {
+//         width: 400px;
+//     }
+
+//     .DifficultySelect > div {
+//         width: 400px;
+//     }
+
+//     .CreateQuiz > div.Buttons {
+//         bottom: 20px;
+//         right: 11px;
+//         width: 100%;
+//         text-align: center;
+//     }
+// }
+
+// @media (max-width: 600px) {
+//     .LanguageSelectGroup > div {
+//         width: 100%;
+//     }
+
+//     .DifficultySelect > div {
+//         width: 100%;
+//     }
+// }

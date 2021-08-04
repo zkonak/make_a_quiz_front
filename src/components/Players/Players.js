@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Alert from '../UI/Alert/Alert';
 import { Link } from 'react-router-dom';
-import './Players.css';
+//import './Players.css';
 import {quizService,questionService,choiceService,userQuizService,userResponseService} from  '../../services';
 import Table from '../../components/Table/Table';
 import api from '../../services/api';
@@ -28,9 +28,10 @@ class Players extends Component {
               .then( response=>{
                 console.log(response)
                 response.data.map((element,i) => {
+                  
                 userQuizService.getByQuiz(element.id).then(userQuizResponse=>{
                 userQuizResponse.data.map((data,index)=>{
-                 
+                  data.createdAt=data.createdAt.split('T')[0];
                  arrayPlayers[index]=data;
                 })
                 
@@ -97,11 +98,12 @@ class Players extends Component {
         let body = '';
          console.log( this.state.players)
             body = (
-                <div className="Players">
-                    <p className="Title" style={this.props.titleStyle}>{this.props.label}</p>
+                <div >
+                    <p  className={this.props.titleStyle}>{this.props.label}</p>
                     <div className="TableCont">
                         <Table columns={columns} 
-                         data={this.state.players} />
+                         data={this.state.players} 
+                         value="5"/>
                         {/* <Table> 
                             content={this.state.quizzes}
                             viewType={this.props.viewType}

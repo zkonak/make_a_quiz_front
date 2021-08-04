@@ -1,0 +1,38 @@
+
+.button {
+  font-family:$sans-serif-family;
+ 
+  color:#FFF;
+  border-radius: .25em;
+  text-shadow: -1px -1px 0px rgba(0,0,0,0.4);
+  border-radius:30px;
+}
+
+.primary {
+  line-height:40px;
+  transition:ease-in-out .2s;
+  padding: 0 16px;
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.25);
+}
+.save {
+  background: $purple-color;
+  
+//   &:before {
+//     content: "\f0c7";
+//   }
+}
+
+.save:hover {
+  background: darken($purple-color, 10%);
+}
+.cancel:hover {
+  background: darken($bold-color, 10%);
+}
+
+.cancel {
+  background: $bold-color;
+  
+//   &:before {
+//     content: "\f05e";
+//   }
+}

@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css?family=Tangerine');
+
+.QuizLists {
+//    display:flex;
+//    flex-direction:column;
+//    width:100%;
+//    align-items:center;
+   display: flex;
+  background-color: $blue-color;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  h2{
+    
+  }
+
+.selectCont {
+    display:flex;
+    justify-content:space-around;
+    text-align: left;
+    
+    width:100%
+}
+
+.selectCont > div {
+    
+    text-align: left;
+    margin: 2em 0em 2em 0em;
+   // font-size: 1.3rem;
+    margin-right: 2em;
+   
+    width: 30%;
+}
+
+.selectCont > div label{
+    color: #fff;
+}
+
+.selectCont > div > div {
+    width: 100%;
+    font-size: 1rem;
+}
+
+.selectCont > div label {
+    display: block;
+    font-size: 0.9rem;
+}
+
+.selectCont > div select {
+    font-size: 1.2rem;
+    margin: 10px 0px;
+    padding: 6px 18px;
+    //font-family: 'Righteous', cursive;
+    width: 100%;
+}
+
+
+     .Title{
+        text-align: center;
+    
+}
+.table{
+         width: 100%;
+    // border: solid 1px $blue-color;
+     // width: 40%;
+    box-shadow: 1px 0 10px 15px rgba(0, 0, 0, .3);
+    padding: 40px;
+    background-color: #fff;
+    margin-bottom:10%;
+}
+thead{
+        color: red;
+        text-align:left;
+}
+
+
+
+#include mobile {
+    .selectCont > div {
+        margin: 0;
+        width: 47%;
+        margin-bottom: 2em;
+    }
+}
+}

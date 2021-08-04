@@ -6,7 +6,7 @@ import { useTable, usePagination } from 'react-table'
 
 
 const Table = (props) => {
-  // Use the state and functions returned from useTable to build your UI
+ 
   
   const columns=props.columns;
   const data=props.data;
@@ -16,10 +16,7 @@ const Table = (props) => {
     getTableBodyProps,
     headerGroups,
     prepareRow,
-    page, // Instead of using 'rows', we'll use page,
-    // which has only the rows for the active page
-
-    // The rest of these things are super handy, too ;)
+    page, 
     canPreviousPage,
     canNextPage,
     pageOptions,
@@ -33,29 +30,15 @@ const Table = (props) => {
     {
       columns,
       data,
-      initialState: { pageIndex: 0 },
+      initialState: { pageIndex: 0,pageSize:5 },
     },
     usePagination
   )
     
-  // Render the UI for your table
+
   return (
     <>
-      {/* <pre>
-        <code>
-          {JSON.stringify(
-            {
-              pageIndex,
-              pageSize,
-              pageCount,
-              canNextPage,
-              canPreviousPage,
-            },
-            null,
-            2
-          )}
-        </code>
-      </pre> */}
+    
       <table className="table" {...getTableProps()}>
         <thead>
           {headerGroups.map(headerGroup => (
@@ -120,7 +103,7 @@ const Table = (props) => {
             setPageSize(Number(e.target.value))
           }}
         >
-          {[10, 20, 30, 40, 50].map(pageSize => (
+          {[5,10, 20, 30, 40, 50].map(pageSize => (
             <option key={pageSize} value={pageSize}>
               Show {pageSize}
             </option>

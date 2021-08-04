@@ -4,13 +4,14 @@ import { Redirect } from 'react-router-dom';
 
 
 
-import  './Score.css';
+//import  './Score.css';
 
 import Question from '../../components/Question/Question';
 import Choices from '../../components/Choices/Choices';
 import Button from '../../components/UI/Button/Button';
 import Alert from '../../components/UI/Alert/Alert';
 import Confirm from '../../components/UI/Confirm/Confirm';
+import NavigationItems from '../../components/Navigation/NavigationItems/NavigationItems'
 
 
 import {quizService,questionService,choiceService,userQuizService,userResponseService} from  '../../services';
@@ -72,7 +73,7 @@ constructor(props){
               this.setState(prevState =>({
                             userQuiz:responseUserQuiz.data,
                             questions: response.data,
-                            quiz:responseQuiz
+                            quiz:responseQuiz.data
                           
             })); 
 
@@ -120,17 +121,15 @@ constructor(props){
           console.log(this.state.questions);
             body = (
                 
-                   <div> <p className="Language">{this.state.quiz.title} Quiz</p>
-                    <p className="Language"> Your total score is {this.state.userQuiz.totalscore}</p></div>
-                    
-                    
-                    );
+                   <div> <h2>{this.state.quiz.title} Quiz</h2>
+                    <h2> Your total score is {this.state.userQuiz.totalscore}</h2></div>
+                  );
                   
              
                   { this.state.questions.map((element,i) => {
                             let questionNo=i+1;
                     items.push(      
-                            <div key={i}>
+                            <div key={i} className="question">
                             <Question 
                                 viewer 
                                 title={element.question} 
@@ -163,15 +162,18 @@ constructor(props){
 
     
         return (
+          <>
+          <NavigationItems/>
             <div className="Quiz">
                 {body}
                 <div className="Body">
                 {items}
                 </div>
-                <Confirm onOkClicked={this.onOkButtonClickedHandler} onCancelClicked={this.onCancelButtonClickedHandler}>{this.props.confirmMsg}</Confirm>
-                  
+                {/* <Confirm className="confirm" onOkClicked={this.onOkButtonClickedHandler} onCancelClicked={this.onCancelButtonClickedHandler}>{this.props.confirmMsg}</Confirm> */}
+                  <button className="button primary save confirm" onClick={this.onOkButtonClickedHandler} >Go To Dashboard</button> 
                 
             </div>
+            </>
         );
     }
 }
