@@ -38,6 +38,7 @@ class CreateQuiz extends Component {
        currentAnswer:0,
        currentQuestionValue: '',
        currentChoicesValues: [],
+       currentQuestionId:"",
        message:"",
        currentScore:0
  
@@ -68,19 +69,69 @@ class CreateQuiz extends Component {
                 scoremin:questionsData.scoremin,
                 currentQuestionNo:1,
                 currentAnswer: questionsData.questions[0].answer,
-                currentScore: questionsData.questions[0].score
+                currentScore: questionsData.questions[0].score,
+                currentQuestionId: questionsData.questions[0].id
                
             }));
            
             }
 
         }
-         
+           const quizId = this.props.match.params.quizId;
+           this.setState(prevState =>({quizId:quizId}));
+           console.log(quizId);
+           await this.fetchData(quizId);
+       
     
     }
 
 
-       
+        fetchData =async (quizId) => {
+          
+        try{
+              const responseQuiz=await quizService.getOne(quizId);
+           
+           try{
+
+            
+             const response =await questionService.getQuestions(quizId);
+            console.log(response);
+            //  let arrayChoice=[];
+            //  response.data[0].Choices.map(e=>{
+            //      arrayChoice.push(e.choice);
+            //  })
+
+              
+              this.setState(prevState =>({
+                            id:responseQuiz.data.id,
+                            title:responseQuiz.data.title,
+                            questions: response.data,
+                            currentQuestionValue: response.data[0].question,
+                            currentChoicesValues: response.data[0].Choices,
+                            currentQuestionId:response.data[0].id,
+                            scoremin:responseQuiz.data.scoremin,
+                            currentQuestionNo:1,
+                            currentAnswer: response.data[0].answer,
+                            currentScore: response.data[0].score
+            }));  
+
+           
+        }catch(error){
+            console.log(error);
+         //  this.setState({message: error.responseChoices.data.message });
+        }
+
+          
+
+         }catch(err){
+                console.log(err);
+             //  this.setState({message: err.response.data.message });
+           }
+
+     }
+
+  
+
     
     
 
@@ -97,42 +148,42 @@ class CreateQuiz extends Component {
        
     }else{
          
-            this.state.questions.map((e,i)=>{
-                let qno=i+1;
-                // if(e.question==null || e.question==""){
-                //     this.setState({message:"You must enter question no"+qno});
-                // }
-                console.log(e)
-                if(e.answer==null || e.answer==""){
+            // this.state.questions.map((e,i)=>{
+            //     let qno=i+1;
+            //     // if(e.question==null || e.question==""){
+            //     //     this.setState({message:"You must enter question no"+qno});
+            //     // }
+            //     console.log(e)
+            //     if(e.answer==null || e.answer==""){
                     
-                    this.setState({message:"You must enter answer of question no "+qno});
-                    return;
-                }
-                if(e.score==null || e.score==""){
-                    this.setState({message:"You must enter score of question no "+qno});
-                    return;
-                }
+            //         this.setState({message:"You must enter answer of question no "+qno});
+            //         return;
+            //     }
+            //     if(e.score==null || e.score==""){
+            //         this.setState({message:"You must enter score of question no "+qno});
+            //         return;
+            //     }
 
-            });
+            // });
          
         try {
-            console.log(this.state.message);
+           
            if (this.state.message==""){
-            const response =  await quizService.addQuiz(this.state.title,this.state.userid,this.state.fontcolor,this.state.backgroundcolor,this.state.scoremin,this.state.questions);
+            const response =  await quizService.updateQuiz(this.state.id,this.state.title,this.state.userid,this.state.fontcolor,this.state.backgroundcolor,this.state.scoremin,this.state.questions);
            
             this.state.questions.forEach(async (element)=>{
           
             
             try {
                 console.log( this.state.questions);
-                  const questionResponse=await questionService.addQuestion(response.data.id,element.question,element.score);
+                  const questionResponse=await questionService.updateQuestion(element.id,response.data.id,element.question,element.score);
 
            
                 
                 element.Choices.forEach( async(choice)=>{
                     try {
-                           let correct=choice==element.answer?true:false
-                           const choicesResponse=await choiceService.addChoice(questionResponse.data.id,choice,correct);
+                           //let correct=choice==element.answer?true:false
+                           const choicesResponse=await choiceService.updateChoice(choice.id,questionResponse.data.id,choice.choice,choice.correct);
                     } catch (err) {
                          console.log(err);
                          this.setState({message: err.response.data.message });
@@ -172,7 +223,8 @@ class CreateQuiz extends Component {
                 question: this.state.currentQuestionValue,
                 Choices: this.state.currentChoicesValues,
                 answer: this.state.currentAnswer,
-                score:scoreValue
+                score:scoreValue,
+                
             });
         } else {
             if(newQuestions.length >= this.state.currentQuestionNo) {
@@ -180,14 +232,16 @@ class CreateQuiz extends Component {
                     question: this.state.currentQuestionValue,
                     Choices: this.state.currentChoicesValues,
                     answer: this.state.currentAnswer,
-                    score: scoreValue
+                    score: scoreValue,
+                    id:this.state.currentQuestionId
                 };
             } else {
                 newQuestions[this.state.currentQuestionNo-1] = {
                     question: this.state.currentQuestionValue,
                     Choices: [],
                     answer:this.state.currentAnswer,
-                    score:scoreValue
+                    score:scoreValue,
+                    id:this.state.currentQuestionId
                 };
             }
         }
@@ -215,7 +269,8 @@ class CreateQuiz extends Component {
                     question: questionValue,
                     Choices: this.state.currentChoicesValues,
                     answer: this.state.currentAnswer,
-                    score: this.state.currentScore
+                    score: this.state.currentScore,
+                    id:this.state.currentQuestionId
                 };
             } else {
                 newQuestions[this.state.currentQuestionNo-1] = {
@@ -233,9 +288,10 @@ class CreateQuiz extends Component {
        
     }
 
-    onChoiceInputsChangedHandler = (event, index) => {
-     
+    onChoiceInputsChangedHandler = (event,object, index) => {
+    
         var choiceValue = event.target.value;
+        object.choice=choiceValue;
         var currentQUestionNo = this.state.currentQuestionNo;
         var newQuestions = this.state.questions.slice();
         if(newQuestions.length < currentQUestionNo) {
@@ -247,11 +303,11 @@ class CreateQuiz extends Component {
             }
         }
         var newChoices = newQuestions[currentQUestionNo-1].Choices.slice();
-
+  console.log(newChoices);
         if(newChoices[index-1] === undefined) {
-            newChoices.splice(index-1, 0, choiceValue);
+            newChoices.splice(index-1, 0, object);
         } else {
-            newChoices[index-1] = choiceValue;
+            newChoices[index-1] = object;
         }
 
         if(newQuestions.length !== 0) {
@@ -265,10 +321,18 @@ class CreateQuiz extends Component {
     }
 
     onAnswerSelectHandler =(ca) => {
-    console.log(ca);
+    
         var currentQuestionNo = this.state.currentQuestionNo;
         var newQuestions = this.state.questions;
-        newQuestions[currentQuestionNo-1].answer = ca;
+        //newQuestions[currentQuestionNo-1].answer = ca;
+        newQuestions[currentQuestionNo-1].Choices.find((o, i) => {
+       if (o.id==ca.id) {
+        newQuestions[currentQuestionNo-1].Choices[i].correct=1;
+    }else{
+        newQuestions[currentQuestionNo-1].Choices[i].correct=0;
+    }
+    });    
+       console.log(newQuestions)
         this.setState(prevState => ({
             currentAnswer: ca,
             questions: newQuestions
@@ -284,7 +348,8 @@ class CreateQuiz extends Component {
                 currentQuestionValue: prevState.questions[this.state.currentQuestionNo-2].question,
                 currentChoicesValues: prevState.questions[this.state.currentQuestionNo-2].Choices,
                 currentAnswer:prevState.questions[this.state.currentQuestionNo-2].answer,
-                currentScore:prevState.questions[this.state.currentQuestionNo-2].score
+                currentScore:prevState.questions[this.state.currentQuestionNo-2].score,
+                currentQuestionId:prevState.questions[this.state.currentQuestionNo-2].id
             }));
           }
     }
@@ -321,17 +386,14 @@ class CreateQuiz extends Component {
                                     currentQuestionValue: this.state.questions[prevState.currentQuestionNo].question,
                                     currentChoicesValues: this.state.questions[prevState.currentQuestionNo].Choices,
                                     currentAnswer: this.state.questions[prevState.currentQuestionNo].answer,
-                                    currentScore: this.state.questions[prevState.currentQuestionNo].score
+                                    currentScore: this.state.questions[prevState.currentQuestionNo].score,
+                                    currentQuestionId:this.state.questions[prevState.currentQuestionNo].id
                                     
                                 }));
                                
                             } else {
                                  this.setState(prevState => ({
-                                     currentQuestionNo: prevState.currentQuestionNo + 1,
-                                     currentQuestionValue: '',
-                                     currentChoicesValues: [],
-                                     currentAnswer:0,
-                                     currentScore:0
+                                   message:"Last question"
                                      
                                 }));
                               
@@ -421,6 +483,7 @@ class CreateQuiz extends Component {
                             answer={this.state.currentAnswer}
                             value={this.state.currentChoicesValues}
                             correct={this.state.CurrentCorrects}
+                            update
                         
                             
                         />
@@ -453,7 +516,7 @@ class CreateQuiz extends Component {
                     }
 
                  <Confirm className="confirm" onOkClicked={()=>this.onOkButtonClickedHandler(1)} onCancelClicked={()=>this.onCancelButtonClickedHandler(1)}>{this.props.confirmMsg}</Confirm>
-                 
+                
                 </div>
                   
                 

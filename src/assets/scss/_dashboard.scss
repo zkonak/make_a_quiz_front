@@ -1,16 +1,20 @@
 .Dashboard{
     display:flex;
     flex-direction:column;
-    align-items:center;
+    //align-items:center;
+    margin-right:1%;
+    margin-left:1%;
+    font-size:0.8rem;
     .userQuizzes{
         display:flex;
         justify-content:space-between;
         .userQuiz1{
-            border:solid 2px $purple-color;
+            border:solid 2px $white-color;
             border-radius:30px;
             box-shadow: 1px 0 10px 15px rgba(0, 0, 0, .3);
             width:45%;
-            margin-top:1%;
+            margin-top:0.5%;
+            
             .qc{
                  background-color:$yellow-color;
                  border-radius:30px;
@@ -18,29 +22,46 @@
             }
         }
         .userQuiz2{
-            border:solid 2px $blue-color;
+            border:solid 2px $white-color;
             border-radius:30px;
             box-shadow: 1px 0 10px 15px rgba(0, 0, 0, .3);
             width:45%;
-            margin-top:1%;
+            margin-top:0.5%;
              .qt{
-                 background-color:$orange-color;
+                 background-color:$yellow-color;
                  border-radius:30px;
                  text-align:center;
             }
         }
-    }
-            .Players{
-                 border:solid 2px $red-color;
+    } 
+     .Players{
+        display:flex;
+        justify-content:space-between;
+            .Players1{
+                border:solid 2px $white-color;
                 border-radius:30px;
                 box-shadow: 1px 0 10px 15px rgba(0, 0, 0, .3);
                 width:45%;
-                margin-top:1%;
+                margin-top:0.5%;
                 .pt{
-                 background-color:$red-color;
+                 background-color:$yellow-color;
                  border-radius:30px;
                  text-align:center;
             }
+            }
+              .QuizList{
+                border:solid 2px $white-color;
+                border-radius:30px;
+                box-shadow: 1px 0 10px 15px rgba(0, 0, 0, .3);
+                width:45%;
+                margin-top:0.5%;
+                .pt{
+                 background-color:$yellow-color;
+                 border-radius:30px;
+                 text-align:center;
+            }
+            }
+
 
             }
         

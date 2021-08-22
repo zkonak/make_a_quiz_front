@@ -12,6 +12,13 @@ const choiceService = {
        
         return await api.post('/option',choiceData);
    
+    },
+
+    updateChoice: async(id,questionId,choice,correct,score)=> {
+        const choiceData = {id,questionId,choice,correct,score};
+       
+        return await api.put('/option/'+id,choiceData);
+   
     }
 
 //     updatePlace: async(user_id,city_id,name,description,rooms ,bathrooms,max_guests,price_by_night,available,placeId)=> {

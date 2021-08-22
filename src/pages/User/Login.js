@@ -7,8 +7,12 @@ import Alert from '../../components/UI/Alert/Alert';
 import FormField from '../../components/FormField/FormField';
 import Input from '../../components/UI/Input/Input';
 import {userService} from '../../services'
-import Cookies from 'universal-cookie';
+
 import logo from "../../assets/logo2.png";
+import Cookies from 'universal-cookie';
+import NavigationItems from '../../components/Navigation/NavigationItems/NavigationItems'
+import Footer from '../../components/Footer/Footer';
+
 const cookies = new Cookies();
 
 
@@ -97,8 +101,7 @@ class Login extends Component {
             body = (
              //   <Aux>
              <>
-             <a href="/" class="brand"> <img className="logo" src={logo} alt="logo"/></a>
-                    {authRedirect} 
+              <NavigationItems/>
                   
                     <div className="center-item">
                     
@@ -140,6 +143,7 @@ class Login extends Component {
                             : null
                         } */}
                     </div>
+                    <Footer/>
                     </>
              
             );

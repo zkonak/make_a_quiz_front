@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-
-import  './Alert.css';
-
+import React from 'react';
+import ReactDom from 'react-dom';
+import Popup from 'react-popup';
 
 
+const Alert = (props) => {
 
-
-class Alert extends Component {
+return(<></>);
+  
 
 }
-export default Alert
+
+export default Alert;

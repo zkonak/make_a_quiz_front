@@ -1,19 +1,27 @@
 
 .center-item {
   display: flex;
-  background-color: $blue-color;
+  //background-color: "#fff";
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
+  margin-top:2%;
+  font-size:0.8rem;
+  .errorMessage{
+    color:$red-color;
+
+  }
+  
   h3{
       text-align:center;
+      color:$orange-color;
   }
   form {
     width: 40%;
     box-shadow: 1px 0 10px 15px rgba(0, 0, 0, .3);
-    padding: 40px;
+    padding: 1%;
     background-color: #fff;
+     font-size:0.8rem;
 
     .input {
       width: 100%;
@@ -22,9 +30,9 @@
       outline: none;
       border: none;
       background-color: #BDD5BA;
-      padding: 10px;
+      padding: 1%;
       line-height: 2;
-      font-size: 16px;
+      font-size:0.8rem;
     }
 
     .button {
@@ -34,7 +42,7 @@
       width: 100%;
       outline: none;
       border: none;
-      padding: 15px;
+      padding:2%;
       margin-top: 20px;
       cursor: pointer;
 
@@ -47,18 +55,20 @@
     p {
       text-align: center;
       margin-bottom: 0px;
+      text-decoration: none;
+      color: $bold-color;
+      padding-left: 3px;
 
-     
-        
-        text-decoration: none;
-        color: $bold-color;
-        padding-left: 3px;
+
 
         &:hover {
           text-decoration: none;
         }
       
+
     }
+   
+
   }
 }
 

@@ -117,9 +117,9 @@ constructor(props){
         let body2='';
         
           const items = []   
-
+ console.log(this.state);
         if(this.state.questions.length !== 0  ){
-          console.log(this.state.quiz);
+         
             body = (
                 
                    <div> <h2>{this.state.quiz.title} Quiz</h2>

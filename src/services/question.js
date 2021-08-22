@@ -12,6 +12,12 @@ const questionService = {
        
         return await api.post('/question',newquestion);
    
+    },
+     updateQuestion: async(id,quizId,question,score)=> {
+        const newquestion = {id,quizId,question,score};
+       
+        return await api.put('/question/'+id,newquestion);
+   
     }
 
 //     updatePlace: async(user_id,city_id,name,description,rooms ,bathrooms,max_guests,price_by_night,available,placeId)=> {

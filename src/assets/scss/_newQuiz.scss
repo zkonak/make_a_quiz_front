@@ -1,14 +1,16 @@
 .NewQuiz{
         background: white;
-        border: solid 1px $blue-color;
-    
+        border: solid 1px $orange-color;
+        border-radius:10px;
+        font-size:0.8rem;
      .Title{
         text-align: center;
     
 }
 .table{
         width: 100%;
-    border: solid 1px $blue-color;
+       //  border: solid 2px $blue-color;
+      //  border-radius:30px;
 }
 thead{
         color: red;

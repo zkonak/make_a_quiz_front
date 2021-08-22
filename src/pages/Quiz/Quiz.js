@@ -119,18 +119,14 @@ constructor(props){
        let scoreTotal=0;
         this.state.questions.map((element,i)=>{
             const foundCorrect = element.Choices.find(correct => correct.correct===1);
-            
             userResponse.push({questionId:element.id});
             userResponse[i].choiceId=element.selectedAnswer;
-           
-            if(foundCorrect.id==element.selectedAnswer){
-              
+           if(foundCorrect.id==element.selectedAnswer){
                 scoreTotal=scoreTotal+element.score;
                 element.correct=true;
                 userResponse[i].score=element.score;
             }
             else{
-               
                 element.correct=false;
                 userResponse[i].score=0;
 
@@ -178,7 +174,7 @@ constructor(props){
         
             body = (
                 
-                    <h2>{this.state.title} Quiz</h2>);
+                    <h2>{this.state.title}</h2>);
                     
              
                   { 
@@ -196,7 +192,6 @@ constructor(props){
                               <Choices 
                                 viewer 
                                 choices={element.Choices} 
-                                
                                 questionIndex={i}
                                 clicked={this.onAnswerSelectedHandler}
                                 answer={element.selectedAnswer}

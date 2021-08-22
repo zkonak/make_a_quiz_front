@@ -9,7 +9,7 @@ import Input from '../../components/UI/Input/Input';
 import {userService} from '../../services';
 import logo from "../../assets/logo2.png";
 import NavigationItems from '../../components/Navigation/NavigationItems/NavigationItems'
-
+import Footer from '../../components/Footer/Footer';
 class SignUp extends Component {
     state = {
         register: false,
@@ -50,10 +50,7 @@ class SignUp extends Component {
             return 'lastname is required'
 
         }
-        if(username==null || username==''){
-            return 'username is required'
-
-        }
+       
         if(email==null || email==''){
             return 'email is required'
 
@@ -83,7 +80,8 @@ class SignUp extends Component {
         if(!nullField){
              try{
                     const response=await userService.addUser(this.state.firstname,this.state.lastname,this.state.username,this.state.email,this.state.password,'N');
-                    this.setState({message:'user created'});
+                    this.setState({message:'User created.You are redirected to the login page..'});
+                    setTimeout(this.props.history.push('/login'),2000);
                      console.log(response);
              } catch(e) {
             console.log(e.response)
@@ -164,6 +162,7 @@ class SignUp extends Component {
                             : null
                         } */}
                     </div>
+                    <Footer/>
                     </>
              
             );

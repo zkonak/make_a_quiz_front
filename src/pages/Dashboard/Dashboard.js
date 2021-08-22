@@ -5,8 +5,8 @@ import UserQuizzes from '../../components/UserQuizzes/UserQuizzes';
 import H2 from '../../components/PageHeading/PageHeading';
 import Players from '../../components/Players/Players';
 import NavigationItems from '../../components/Navigation/NavigationItems/NavigationItems'
-
-
+import NewQuizList from '../../components/UserQuizzes/NewQuizList';
+import Footer from '../../components/Footer/Footer';
 class Dashboard extends Component {
     
 
@@ -29,9 +29,7 @@ class Dashboard extends Component {
                     <div className="userQuizzes">
                       <div className="userQuiz1">
                     {  <UserQuizzes 
-                      
-                        
-                        quizViewType="created"
+                       quizViewType="created"
                         titleStyle="qc"
                         label="Quiz created by You"
                         viewType="created"
@@ -39,7 +37,6 @@ class Dashboard extends Component {
                     </div>
                      <div className="userQuiz2">
                     { <UserQuizzes 
-                      
                         titleStyle="qt"
                         quizViewType="took"
                         
@@ -49,20 +46,30 @@ class Dashboard extends Component {
                      </div>
                     </div>
                     <div className="Players">
+                    <div className="Players1">
                     { <Players 
                       
                         titleStyle="pt"
-                        
-                        
                         label="Players"
                        
                     /> }
+                    </div>
+                     <div className="QuizList">
+                    { <NewQuizList 
+                      
+                        titleStyle="pt"
+                        label="Available Quizzes"
+                        dashboard
+                    /> }
                     </div> 
+                    </div> 
+                    
                     {/* <div className="ButtonGroup">
                         <Button clicked={this.onClickTakeQuizHandler} >Take Quiz</Button>
                         <Button clicked={this.onClickCreateQuizHandler} btnType="cta">Create Quiz</Button>
                     </div> */}
                 </div>
+                {/* <Footer/> */}
                 </>
             );
         }

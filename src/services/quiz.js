@@ -23,10 +23,22 @@ const quizService = {
         return await api.post('/quiz',quiz);
    
     },
+     updateQuiz: async(id,title,userId,fontcolor,backgroundcolor,scoremin,questions)=> {
+        const quiz = {id,title,userId,fontcolor,backgroundcolor,scoremin};
+       
+        return await api.put('/quiz/'+id,quiz);
+   
+    },
     getOne: async(quizId)=> {
        
        
         return await api.get('/quiz/'+quizId);
+   
+    },
+     delete: async(quizId)=> {
+       
+       
+        return await api.delete('/quiz/'+quizId);
    
     },
      

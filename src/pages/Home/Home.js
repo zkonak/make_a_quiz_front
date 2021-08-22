@@ -9,8 +9,11 @@ import Input from '../../components/UI/Input/Input';
 import iconQuiz from '../../assets/pre-quiz-header-icon.png';
 import iconPlayQuiz from '../../assets/play-quiz-icon.png';
 import NewQuiz from  '../../components/NewQuizzes/NewQuiz'
-
+import Footer from '../../components/Footer/Footer';
 class Home extends Component {
+    state={
+        search:""
+    }
    
     onClickCreateQuizHandler = () => {
       
@@ -18,15 +21,27 @@ class Home extends Component {
         
     }
 
+    onSearchTextHandler=event=>{
+        this.setState({search:event.target.value})
+    }
+      onSearchHandler = event => {
+       
+       this.props.history.push("/available-quizzes/"+this.state.search);
+   
+    }
+
     render() {
         return (
+            <>
             <div>
                <NavigationItems/> 
                 <div className="Home">
                 <div className="container">
-                    <img src={image} className="img" /> 
-                   
-                   <Input type="text" className="txt" placeHolder="Search a quiz" />
+                    {/* <img src={image} className="img" />  */}
+                   {/* <form onSubmit={this.onSearchHandler}> 
+                   <Input type="text" className="txt"  changed={(e)=>this.onSearchTextHandler(e)} placeHolder="Search a quiz" />
+                   <Button>Search</Button>
+                   </form> */}
                   </div>
                    
                 <div className="icons">
@@ -37,7 +52,7 @@ class Home extends Component {
                      </article>
                     <article className="article">
                          <img src={iconPlayQuiz} alt="iconQuiz"/>
-                         <p>Create your new quiz.   On your dashboard,click on "Create quiz".
+                         <p>Take your  quiz. Learn and enjoy!.
                         </p>
                     </article>
                
@@ -48,7 +63,9 @@ class Home extends Component {
                    
                 </div>
               
-            </div>   
+            </div>  
+            <Footer/>
+            </> 
           
         );
     }

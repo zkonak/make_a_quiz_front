@@ -122,7 +122,7 @@ constructor(props){
             body = (
                 
                    <div> <h2>{this.state.quiz.title} Quiz</h2>
-                    <h2> Your total score is {this.state.userQuiz.totalscore}</h2></div>
+                    <h2> Total score is {this.state.userQuiz.totalscore}</h2></div>
                   );
                   
              

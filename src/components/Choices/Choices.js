@@ -34,7 +34,7 @@ console.log(props)
 
     if(!props.viewer) {
       
-     
+      if(!props.update) {
    
         console.log(props.answer);
         choices = [1, 2, 3, 4].map(i => {
@@ -47,36 +47,40 @@ console.log(props)
                         changed={(event) => props.changed(event, i)}
                         value={props.value.length >= i ? props.value[i-1] : ""}
                     />
-                {/* <Input inputType="checkbox" key={i} changed={() => props.clicked(i)}  checked={i==props.answer? true : false} value={i}/>
-                     */}
+               
                     <Checkbox size="small" className="checkbox" isChecked={props.value[i-1]==props.answer? true : false} onChange={() => props.clicked(props.value.length >= i ? props.value[i-1] : "")} value={props.value.length >= i ? props.value[i-1] : ""}
                       />
-                   
-{/*                 
-                     <Input inputType="checkbox"
-                     changed={() => props.clicked(i)}
-                     value={i}
-                     id={props.answer}
-                     name={props.answer}
-                     checked={i==answer? true : false}
                      
-                    
-                    
-               /> */}
-                     
-                    {/* <p 
-                        className={props.answer === i ? classes.answer : ''} 
-                        onClick={() => props.clicked(i)}
-                        data-tip="Click it for choosing the correct answer"
-                    >
-                    ca</p> */}
-                    
                 </div>
             );
 
 
           
         });
+      }else{
+
+          choices = [1, 2, 3, 4].map(i => {
+            return (
+                <div key={i}>
+                  <p >{titleArray[i]})</p>
+
+                    <Input 
+                        inputType="text" 
+                        changed={(event) => props.changed(event,props.value[i-1], i)}
+                        value={props.value.length >= i ? props.value[i-1].choice : ""}
+                    />
+               
+                    <Checkbox size="small" className="checkbox" isChecked={props.value[i-1] && props.value[i-1].correct==1? true : false} onChange={() => props.clicked(props.value.length >= i ? props.value[i-1] : "")} value={props.value.length >= i ? props.value[i-1] : ""}
+                      />
+                     
+                </div>
+            );
+
+
+          
+        });
+
+      }
     } else {
 
         

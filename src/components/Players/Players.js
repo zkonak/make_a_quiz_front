@@ -5,12 +5,14 @@ import { Link } from 'react-router-dom';
 //import './Players.css';
 import {quizService,questionService,choiceService,userQuizService,userResponseService} from  '../../services';
 import Table from '../../components/Table/Table';
+import Input from '../../components/UI/Input/Input';
 import api from '../../services/api';
-import NewTabIcon from '../../assets/open-in-new-tab.png';
+import NewTabIcon from '../../assets/Eye.png';
 
 class Players extends Component {
     state = {
         players: [],
+        search:[]
        
     }
 
@@ -32,19 +34,28 @@ class Players extends Component {
                 userQuizService.getByQuiz(element.id).then(userQuizResponse=>{
                 userQuizResponse.data.map((data,index)=>{
                   data.createdAt=data.createdAt.split('T')[0];
-                 arrayPlayers[index]=data;
+                  if(data.userId!=localStorage.getItem("userId")){
+                     arrayPlayers[index]=data;
+                }
+                
                 })
+                 
                 
                 }).catch(error=>{
                    console.log(error)
                 })
-               
+                
+
+              //  if(element.userId==localStorage.getItem("userId")){
+              //       response.data.remove(i);
+              //   }
+
                
              })
               
              setTimeout(() => {
           
-              this.setState(prevState =>({players:arrayPlayers}));
+              this.setState(prevState =>({players:arrayPlayers,search:arrayPlayers}));
              },1000);
 
              console.log(this.state.players);
@@ -61,6 +72,21 @@ class Players extends Component {
            
        
             
+    }
+    onSearchHandler = event => {
+       let players=this.state.players;
+       let arrayFound=[];
+     
+       players.find((o, i) => {
+       if ((o.User.firstname.toLowerCase()+' '+o.User.lastname.toLowerCase()).match(event.target.value.toLowerCase())) {
+        arrayFound.push(o);
+    }
+    }
+    ); 
+    
+      
+      this.setState({search:arrayFound});
+       
     }
 
    
@@ -90,7 +116,7 @@ class Players extends Component {
              // <img src={NewTabIcon} alt="see Quiz"/>
             Header: "Quiz",
             Cell: row => (
-                          <Link to={`/score/${row.row.original.id}`}><img src={NewTabIcon} alt="see Quiz"/></Link>)
+                          <Link to={`/score/${row.row.original.id}`}><img className="icon" src={NewTabIcon} alt="see Quiz"/></Link>)
          }])
 
       
@@ -100,9 +126,13 @@ class Players extends Component {
             body = (
                 <div >
                     <p  className={this.props.titleStyle}>{this.props.label}</p>
+                     <div className="selectCont">
+                        
+                            <Input type="text" changed={(e)=>this.onSearchHandler(e)}   placeHolder="Search by player" />
+                     </div>
                     <div className="TableCont">
                         <Table columns={columns} 
-                         data={this.state.players} 
+                         data={this.state.search} 
                          value="5"/>
                         {/* <Table> 
                             content={this.state.quizzes}

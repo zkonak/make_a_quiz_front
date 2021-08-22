@@ -55,7 +55,7 @@ class NewQuiz extends Component {
              // <img src={NewTabIcon} alt="see Quiz"/>
             Header: " Take Quiz",
             Cell: row => (
-                          <Link to={`/quiz/${row.row.original.id}`}><img src={NewTabIcon} alt="see Quiz"/></Link>)
+                          <Link to={`/quiz/${row.row.original.id}`}><img className="icon" src={NewTabIcon} alt="see Quiz"/></Link>)
          }])
 
       
